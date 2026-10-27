@@ -9,6 +9,33 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>fitnesse-mcp-plugin</name>
+  <description>FitNesse plugin that serves a Model Context Protocol endpoint, letting MCP clients such as Claude
+    Code or opencode read, edit and run FitNesse wiki pages, manage attachments and inspect Slim fixtures.</description>
+  <url>https://github.com/tortaje/FitnesseMCP</url>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>tortaje</id>
+      <name>Stephane Tortajada</name>
+      <email>stephane.tortajada@gmail.com</email>
+      <url>https://github.com/tortaje</url>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/tortaje/FitnesseMCP.git</connection>
+    <developerConnection>scm:git:https://github.com/tortaje/FitnesseMCP.git</developerConnection>
+    <url>https://github.com/tortaje/FitnesseMCP</url>
+    <tag>HEAD</tag>
+  </scm>
 
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
@@ -64,6 +91,83 @@
           <argLine>-Djava.util.logging.config.file=${project.basedir}/src/test/resources/logging.properties</argLine>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>3.3.1</version>
+        <configuration>
+          <tagNameFormat>v@{project.version}</tagNameFormat>
+          <releaseProfiles>release</releaseProfiles>
+          <goals>deploy</goals>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <!-- Activated by the release plugin: sources, javadoc, GPG signatures and upload to the Central Portal. -->
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.4.0</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.12.0</version>
+            <configuration>
+              <doclint>none</doclint>
+              <quiet>true</quiet>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>3.2.8</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.central</groupId>
+            <artifactId>central-publishing-maven-plugin</artifactId>
+            <version>0.12.0</version>
+            <extensions>true</extensions>
+            <configuration>
+              <publishingServerId>central</publishingServerId>
+              <!-- Uploads and validates; the release goes live only after "Publish" in central.sonatype.com. -->
+              <autoPublish>false</autoPublish>
+              <waitUntil>validated</waitUntil>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
