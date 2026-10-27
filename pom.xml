@@ -4,7 +4,7 @@
 
   <groupId>io.github.tortaje</groupId>
   <artifactId>fitnesse-mcp-plugin</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>fitnesse-mcp-plugin</name>
   <description>FitNesse plugin that serves a Model Context Protocol endpoint, letting MCP clients such as Claude
@@ -32,7 +32,7 @@
     <connection>scm:git:https://github.com/tortaje/FitnesseMCP.git</connection>
     <developerConnection>scm:git:https://github.com/tortaje/FitnesseMCP.git</developerConnection>
     <url>https://github.com/tortaje/FitnesseMCP</url>
-    <tag>v1.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <properties>
