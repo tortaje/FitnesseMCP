@@ -1,5 +1,8 @@
 # FitNesse MCP plugin
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.tortaje/fitnesse-mcp-plugin)](https://central.sonatype.com/artifact/io.github.tortaje/fitnesse-mcp-plugin)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
 A FitNesse plugin that serves a [Model Context Protocol](https://modelcontextprotocol.io) endpoint at
 `http://localhost:<FitNesse port + 1>/mcp` (Streamable HTTP, JSON responses), for example
 `http://localhost:8081/mcp` when FitNesse runs on port 8080. It lets an MCP client such as Claude Code or
