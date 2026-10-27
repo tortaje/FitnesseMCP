@@ -1,0 +1,16 @@
+target/
+
+# Example: build outputs, downloaded jar and files FitNesse generates at runtime
+example/plugins/
+example/fixtures/classes/
+example/*.jar
+example/FitNesseRoot/files/
+example/FitNesseRoot/ErrorLogs/
+example/FitNesseRoot/RecentChanges/
+example/FitNesseRoot/RerunLastFailures_*
+example/FitNesseRoot/**/*.zip
+example/FitNesseRoot/**/properties
+.idea/
+.superpowers/
+docs/
+example/
